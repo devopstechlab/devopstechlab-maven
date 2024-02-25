@@ -1,7 +1,7 @@
 <form action="action_page.php">
   <div class="container">
-    <h1>New user Register for DevOps Learning at Devops TechLab. I hope you are enjoying Jenkins Training.Let's Learn automatic ceployment.</h1>
-    <p>Please fill in this form to create an account. This is test</p>
+    <h1>New user Register for DevOps Learning at Devops TechLab. I hope you are enjoying Jenkins Training.Let's Learn automatic ceployment. Pipeline Auto Deployment</h1>
+    <p>Please fill in this form to create an account. Pipeline Auto Deployment</p>
     <hr>
      
     <label for="Name"><b>Enter Name</b></label>

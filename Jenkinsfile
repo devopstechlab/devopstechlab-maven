@@ -30,7 +30,6 @@ pipeline {
                 timeout(time: 60, unit: 'SECONDS') {
                     input 'Do you want to deploy in prod?'
             }
-            {
                 build 'deploy-to-prod'
             }
         }                

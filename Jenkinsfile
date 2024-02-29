@@ -27,8 +27,8 @@ pipeline {
         }
         stage('Tr-Deploy-to-prod') {
             steps {
-                input 'do you want to deploy to dev?'
-                timeout(time: 60, unit: 'SECONDS')
+                timeout(time: 60, unit: 'SECONDS') {
+                    input 'Do you want to deploy in prod?'
             }
             {
                 build 'deploy-to-prod'

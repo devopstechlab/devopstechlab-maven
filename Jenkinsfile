@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven3.9'
-        jdk 'java17'
-    }
     stages {
         stage('Git-Download') {
             steps {
@@ -12,25 +8,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                junit stdioRetention: '', testResults: '**/target/surefire-reports/*.xml'
-            }
-        }
-        stage('Archive-Artifact') {
-            steps {
-                archiveArtifacts artifacts: '**/*.war', followSymlinks: false
-            }
-        }
-        stage('deploy-to-prod') {
-            steps {
-                timeout(time: 60, unit: 'SECONDS') {
-                    input 'Do you want to deploy in prod?'
-                }
-                build 'deploy-to-prod'
+                sh '''
+                docker build -t mywebapp:${BUILD_NUMBER} .
+                docker tag mywebapp:${BUILD_NUMBER} devopstechlab/mywebapp:${BUILD_NUMBER}
+                docker tag devopstechlab/mywebapp:${BUILD_NUMBER} devopstechlab/mywebapp:latest
+                docker push devopstechlab/mywebapp:${BUILD_NUMBER}
+                docker push devopstechlab/mywebapp:latest
+                '''
             }
         }
     }
